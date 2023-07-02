@@ -1,22 +1,5 @@
 # Standard Go Project Layout
 
-Translations:
-
-* [한국어 문서](README_ko.md)
-* [简体中文](README_zh.md)
-* [正體中文](README_zh-TW.md)
-* [简体中文](README_zh-CN.md) - ???
-* [Français](README_fr.md)
-* [日本語](README_ja.md)
-* [Português](README_ptBR.md)
-* [Español](README_es.md)
-* [Română](README_ro.md)
-* [Русский](README_ru.md)
-* [Türkçe](README_tr.md)
-* [Italiano](README_it.md)
-* [Vietnamese](README_vi.md)
-* [Українська](README_ua.md)
-* [Indonesian](README_id.md)
 
 ## Overview
 
@@ -80,14 +63,6 @@ It's ok not to use it if your app project is really small and where an extra lev
 
 The `pkg` directory origins: The old Go source code used to use `pkg` for its packages and then various Go projects in the community started copying the pattern (see [`this`](https://twitter.com/bradfitz/status/1039512487538970624) Brad Fitzpatrick's tweet for more context).
 
-### `/vendor`
-
-Application dependencies (managed manually or by your favorite dependency management tool like the new built-in [`Go Modules`](https://github.com/golang/go/wiki/Modules) feature). The `go mod vendor` command will create the `/vendor` directory for you. Note that you might need to add the `-mod=vendor` flag to your `go build` command if you are not using Go 1.14 where it's on by default.
-
-Don't commit your application dependencies if you are building a library.
-
-Note that since [`1.13`](https://golang.org/doc/go1.13#modules) Go also enabled the module proxy feature (using [`https://proxy.golang.org`](https://proxy.golang.org) as their module proxy server by default). Read more about it [`here`](https://blog.golang.org/module-mirror-launch) to see if it fits all of your requirements and constraints. If it does, then you won't need the `vendor` directory at all.
-
 ## Service Application Directories
 
 ### `/api`
@@ -109,10 +84,6 @@ Web application specific components: static web assets, server side templates an
 Configuration file templates or default configs.
 
 Put your `confd` or `consul-template` template files here.
-
-### `/init`
-
-System init (systemd, upstart, sysv) and process manager/supervisor (runit, supervisord) configs.
 
 ### `/scripts`
 
@@ -177,14 +148,6 @@ Other assets to go along with your repository (images, logos, etc).
 This is the place to put your project's website data if you are not using GitHub pages.
 
 See the [`/website`](website/README.md) directory for examples.
-
-## Directories You Shouldn't Have
-
-### `/src`
-
-Some Go projects do have a `src` folder, but it usually happens when the devs came from the Java world where it's a common pattern. If you can help yourself try not to adopt this Java pattern. You really don't want your Go code or Go projects to look like Java :-)
-
-Don't confuse the project level `/src` directory with the `/src` directory Go uses for its workspaces as described in [`How to Write Go Code`](https://golang.org/doc/code.html). The `$GOPATH` environment variable points to your (current) workspace (by default it points to `$HOME/go` on non-windows systems). This workspace includes the top level `/pkg`, `/bin` and `/src` directories. Your actual project ends up being a sub-directory under `/src`, so if you have the `/src` directory in your project the project path will look like this: `/some/path/to/workspace/src/your_project/src/your_code.go`. Note that with Go 1.11 it's possible to have your project outside of your `GOPATH`, but it still doesn't mean it's a good idea to use this layout pattern.
 
 
 ## Badges
